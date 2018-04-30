@@ -1,0 +1,3 @@
+[submodule "tools/android-typings-for-native-sdk/android-dts-generator"]
+	path = tools/android-typings-for-native-sdk/android-dts-generator
+	url = https://github.com/NativeScript/android-dts-generator.git

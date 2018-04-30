@@ -1,0 +1,14 @@
+/* Include.gradle configuration: http://docs.nativescript.org/plugins/plugins#includegradle-specification */
+
+android {
+	defaultConfig {
+        manifestPlaceholders = [
+                wonderpushDefaultActivity:  'com.tns.NativeScriptActivity',
+                wonderpushNotificationIcon: '@drawable/icon'
+        ]
+	}
+}
+
+dependencies {
+    compile 'com.wonderpush:wonderpush-android-sdk:1.2.7.0'
+}
