@@ -1,5 +1,7 @@
 import {WonderPushAbstract, WonderPushCustomProperties} from './wonderpush-nativescript-sdk.common';
 
+declare const WonderPush: any;
+
 export class WonderPushIos extends WonderPushAbstract {
 
     constructor() {
@@ -10,23 +12,42 @@ export class WonderPushIos extends WonderPushAbstract {
     protected init() {
     }
 
+    setClientIdSecret(clientId: string, clientSecret: string) {
+        WonderPush.setClientIdSecret(clientId, clientSecret);
+    }
+
+    setupDelegateForApplication(application: UIApplication) {
+        WonderPush.setupDelegateForApplication(application);
+    }
+
+    setupDelegateForUserNotificationCenter() {
+        WonderPush.setupDelegateForUserNotificationCenter();
+    }
+
+    getNotificationEnabled() {
+        return WonderPush.getNotificationEnabled();
+    }
+
+    setNotificationEnabled(enabled: boolean) {
+        WonderPush.setNotificationEnabled(enabled);
+    }
+
     setLogging(enabled: boolean) {
-        console.error('NOT IMPLEMENTED');
+        WonderPush.setLogging(enabled);
     }
 
     trackEvent(type: string, custom?: WonderPushCustomProperties) {
-        console.error('NOT IMPLEMENTED');
+        WonderPush.trackEventWithData(type, custom);
     }
 
     getInstallationCustomProperties(): WonderPushCustomProperties {
-        console.error('NOT IMPLEMENTED');
-        return undefined;
+        return WonderPush.getInstallationCustomProperties();
     }
 
     putInstallationCustomProperties(custom?: WonderPushCustomProperties) {
-        console.error('NOT IMPLEMENTED');
+        WonderPush.putInstallationCustomProperties(custom);
     }
 
 }
 
-export const WonderPush = new WonderPushIos();
+exports.WonderPush = new WonderPushIos();

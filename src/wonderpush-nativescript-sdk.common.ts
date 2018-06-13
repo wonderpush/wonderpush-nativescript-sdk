@@ -22,6 +22,8 @@ export abstract class WonderPushAbstract {
 
     protected abstract init();
     public abstract setLogging(enabled: boolean);
+    public abstract getNotificationEnabled();
+    public abstract setNotificationEnabled(enabled: boolean);
     public abstract trackEvent(type: string, custom?: WonderPushCustomProperties);
     public abstract getInstallationCustomProperties(): WonderPushCustomProperties;
     public abstract putInstallationCustomProperties(custom?: WonderPushCustomProperties);

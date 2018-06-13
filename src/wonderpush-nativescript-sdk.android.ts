@@ -20,6 +20,14 @@ export class WonderPushAndroid extends WonderPushAbstract {
         com.wonderpush.sdk.WonderPush.setLogging(enabled);
     }
 
+    getNotificationEnabled() {
+        return com.wonderpush.sdk.WonderPush.getNotificationEnabled();
+    }
+
+    setNotificationEnabled(enabled: boolean) {
+        com.wonderpush.sdk.WonderPush.setNotificationEnabled(enabled);
+    }
+
     trackEvent(type: string, custom?: WonderPushCustomProperties) {
         const jsonObj = custom ? new org.json.JSONObject(JSON.stringify(custom)) : null;
         com.wonderpush.sdk.WonderPush.trackEvent(type, jsonObj);
