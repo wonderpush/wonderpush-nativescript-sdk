@@ -41,7 +41,17 @@ export class WonderPushIos extends WonderPushAbstract {
     }
 
     getInstallationCustomProperties(): WonderPushCustomProperties {
-        return WonderPush.getInstallationCustomProperties();
+        const nsdict = WonderPush.getInstallationCustomProperties();
+        // Convert the NSDictionary to a plain object, using JSON serialization to avoid complex recursive marshalling code
+        let jsonData: NSData;
+        try {
+            jsonData = NSJSONSerialization.dataWithJSONObjectOptionsError(nsdict, 0);
+        } catch (err) {
+            console.error("Failed to marshal NSDictionary:", err);
+            return {};
+        }
+        const jsonStr: string = NSString.alloc().initWithDataEncoding(jsonData, NSUTF8StringEncoding).toString();
+        return JSON.parse(jsonStr);
     }
 
     putInstallationCustomProperties(custom?: WonderPushCustomProperties) {
