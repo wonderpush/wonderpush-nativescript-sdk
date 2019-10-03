@@ -2,19 +2,19 @@
 var fs = require('fs-extra');
 var path = require('path');
 
-module.exports = function (logger, platformsData, projectData, hookArgs) {
-    var platform = hookArgs.platform.toLowerCase();
+module.exports = function (logger, hookArgs) {
+    var platform = hookArgs.prepareData.platform.toLowerCase();
 
     if (platform == 'ios') {
-        var appResourcesDirectoryPath = projectData.appResourcesDirectoryPath;
+        var appResourcesDirectoryPath = hookArgs.projectData.appResourcesDirectoryPath;
         var entitlementsFile = path.join(appResourcesDirectoryPath, 'iOS', 'app.entitlements');
-        var projectRoot = path.join(projectData.platformsDir, 'ios');
-        var project = path.join(projectRoot, projectData.projectName);
-        var dest = path.join(project, projectData.projectName + '.entitlements');
+        var projectRoot = path.join(hookArgs.projectData.platformsDir, 'ios');
+        var project = path.join(projectRoot, hookArgs.projectData.projectName);
+        var dest = path.join(project, hookArgs.projectData.projectName + '.entitlements');
 
         return fs.copy(entitlementsFile, dest)
             .then(function () {
-                logger.out('Copied `' + entitlementsFile + '` to `' + dest + '`');
+                logger.info('Copied `' + entitlementsFile + '` to `' + dest + '`');
             });
     }
 

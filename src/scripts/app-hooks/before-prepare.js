@@ -2,14 +2,14 @@
 var fs = require('fs-extra');
 var path = require('path');
 
-module.exports = function (logger, platformsData, projectData, hookArgs) {
-    var platform = hookArgs.platform.toLowerCase();
+module.exports = function (logger, hookArgs) {
+    var platform = hookArgs.prepareData.platform.toLowerCase();
 
     if (platform == 'ios') {
-        var appResourcesDirectoryPath = projectData.appResourcesDirectoryPath;
+        var appResourcesDirectoryPath = hookArgs.projectData.appResourcesDirectoryPath;
         var inputEntitlementsFile = path.join(appResourcesDirectoryPath, 'iOS', 'app.entitlements');
-        var entitlementsFile = projectData.projectName + '.entitlements';
-        var entitlementsPath = path.join(projectData.projectName, entitlementsFile);
+        var entitlementsFile = hookArgs.projectData.projectName + '.entitlements';
+        var entitlementsPath = path.join(hookArgs.projectData.projectName, entitlementsFile);
         var platformResourcesDirectory = path.join(appResourcesDirectoryPath, 'iOS');
         var target = path.join(platformResourcesDirectory, 'build.xcconfig');
 
